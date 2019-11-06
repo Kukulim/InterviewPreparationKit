@@ -1,40 +1,51 @@
 ﻿#include <iostream>
-#include<string>
+#include<vector>
 
 using namespace std;
 
-// Complete the repeatedString function below.
-unsigned long long int repeatedString(string s, unsigned long long int n) {
-
-	unsigned long long int wynik = 0;
-	unsigned long long int ile_razy = n / s.size();
-	unsigned long long int reszta = n % s.size();
-
-		for (unsigned long long int i = 0; i < s.size(); i++)
+int hourglassSum(vector<vector<int>> arr)
+{
+	int suma[16] = { 0 };
+	int p = 0;
+	int suma_max = 0;
+	int j = 0;
+	for (int w = 0; w < 4; w++)
+	{
+		for (int k = 0; k < 4; k++)
 		{
-			if (s[i] == 'a') {
-				wynik++;
+			for (int i = 0 + k; i < 3 + k; i++)
+			{
+				suma[p] += arr[j + w][i];
+				suma[p] += arr[j + 2 + w][i];
 			}
+			suma[p] += arr[1 + w][1 + k];
+			p++;
 		}
-		wynik =wynik * ile_razy;
-		for (int i = 0; i < reszta; i++)
-		{
-			if (s[i] == 'a') {
-				wynik++;
-			}
-		}
-	
-	return wynik;
+	}
+	suma_max = suma[0];
+	for (int i = 0; i < 16; i++)
+		if (suma_max < suma[i])
+			suma_max = suma[i];
+
+	return suma_max;
+
 }
 
 int main()
 {
 
-	string s;
-	cin >> s;
-	unsigned long long int n;
-	cin >> n;
+	vector<vector<int>> arr(6);
+	for (int i = 0; i < 6; i++) {
+		arr[i].resize(6);
 
-	cout<<  repeatedString(s, n);
+		for (int j = 0; j < 6; j++) {
+			cin >> arr[i][j];
+		}
+	}
+
+	int result = hourglassSum(arr);
+
+	cout << result << "\n";
+
 	return 0;
 }
