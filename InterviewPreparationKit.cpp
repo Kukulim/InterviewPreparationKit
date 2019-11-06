@@ -1,31 +1,41 @@
-﻿#include <cmath>
-#include <cstdio>
-#include <vector>
-#include <iostream>
-#include <algorithm>
+﻿#include <iostream>
+
 using namespace std;
 
+int main()
+{
+	int wielkosc_tablicy, przeuniecie;
+	cin >> wielkosc_tablicy >> przeuniecie;
 
-int main() {
-	long int N, K, p, q, sum, i, j, max = 0, x = 0;
+	int* tablica = new int[wielkosc_tablicy];
+	int* tablica_buffor = new int[wielkosc_tablicy - przeuniecie];
+	int* tablica_buffor_minus = new int[przeuniecie];
 
-	cin >> N >> K;
-	long int* a = new long int[N + 1]();
-
-	for (i = 0; i < K; i++)
+	for (int i = 0; i < wielkosc_tablicy; i++)
+		cin >> tablica[i];
+	for (int i = 0; i < (wielkosc_tablicy - przeuniecie); i++)
 	{
-		cin >> p >> q >> sum;
-		a[p] += sum;
-		if ((q + 1) <= N) a[q + 1] -= sum;
+		tablica_buffor[i] = tablica[i + przeuniecie];
+	}
+	for (int i = 0; i < (przeuniecie); i++)
+	{
+		tablica_buffor_minus[i] = tablica[i];
 	}
 
-	for (i = 1; i <= N; i++)
-	{
-		x = x + a[i];
-		if (max < x) max = x;
 
+	for (int i = 0; i < (wielkosc_tablicy - przeuniecie); i++)
+	{
+		cout << tablica_buffor[i] << " ";
+	}
+	for (int i = 0; i < (przeuniecie); i++)
+	{
+		cout << tablica_buffor_minus[i] << " ";
 	}
 
-	cout << max;
-	return 0;
+
+
+	delete[] tablica;
+	delete[] tablica_buffor;
+	delete[] tablica_buffor_minus;
+
 }
