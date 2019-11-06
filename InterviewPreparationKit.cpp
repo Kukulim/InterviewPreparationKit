@@ -1,40 +1,30 @@
 ﻿#include <iostream>
 #include<string>
+#include<vector>
 
 using namespace std;
-
-// Complete the repeatedString function below.
-unsigned long long int repeatedString(string s, unsigned long long int n) {
-
-	unsigned long long int wynik = 0;
-	unsigned long long int ile_razy = n / s.size();
-	unsigned long long int reszta = n % s.size();
-
-		for (unsigned long long int i = 0; i < s.size(); i++)
+int minimumSwaps(vector<int> arr) {
+	int licznik = 0;
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr[i] != i+1)
 		{
-			if (s[i] == 'a') {
-				wynik++;
-			}
+			
+			licznik++;
 		}
-		wynik =wynik * ile_razy;
-		for (int i = 0; i < reszta; i++)
-		{
-			if (s[i] == 'a') {
-				wynik++;
-			}
-		}
-	
-	return wynik;
+	}
+	return licznik-1;
 }
 
 int main()
 {
-
-	string s;
-	cin >> s;
-	unsigned long long int n;
+	int n;
 	cin >> n;
+	vector<int> tablica(n);
+	for (int i = 0; i < n; i++) {
+		cin >> tablica[i];
+	}
+	cout << minimumSwaps(tablica);
 
-	cout<<  repeatedString(s, n);
 	return 0;
 }
