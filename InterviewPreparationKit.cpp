@@ -1,38 +1,37 @@
 ﻿#include <iostream>
 #include<string>
 #include<vector>
+#include<algorithm>
 
 using namespace std;
-int minimumSwaps(vector<int> arr) {
-	int licznik = 0;
-	for (int i = 0; i < arr.size(); i++)
-	{
-		if (arr[i] != i+1)
-		{
-			
-			int pozycja = 0;
-			while (arr[i + pozycja] != (i + 1))
-			{
-				pozycja++ ;
-			}
-			int bufor = arr[i];
-			arr[i] = i+1;
-			arr[i+pozycja] = bufor;
-			licznik++;
-		}
-	}
-	
-	return licznik;
-}
 
+void calc(vector<int> q)
+{
+	int ans = 0;
+	for (int i = q.size() - 1; i >= 0; i--) {
+		if (q[i] - (i + 1) > 2) {
+			cout << "Too chaotic" << endl;
+			return;
+		}
+		for (int j = 0; j < i; j++)
+			if (q[j] > q[i]) ans++;
+	}
+	cout << ans << endl;
+}
 int main()
 {
-	int n;
-	cin >> n;
-	vector<int> tablica(n);
-	for (int i = 0; i < n; i++) {
-		cin >> tablica[i];
+	int licznik;
+	cin >> licznik;
+	for (int i = 0; i < licznik; i++)
+	{
+		int n;
+		cin >> n;
+		vector<int> tablica(n);
+		for (int i = 0; i < n; i++) {
+			cin >> tablica[i];
+		}
+
+		calc(tablica);	
 	}
-	cout<<minimumSwaps(tablica);
 	return 0;
 }
