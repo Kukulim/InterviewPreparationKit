@@ -1,35 +1,30 @@
 ﻿#include <iostream>
 #include <vector>
+#include<algorithm>
 
 using namespace std;
 
 
-void countSwaps(vector<int> a) {
-	int x=0;
-	for (int i = 0; i < a.size(); i++) {
-
-		for (int j = 0; j < a.size() - 1; j++) {
-			// Swap adjacent elements if they are in decreasing order
-			if (a[j] > a[j + 1]) {
-				swap(a[j], a[j + 1]);
-				x++;
-			}
-		}
+void countSwaps(vector<int> a, int kasa) {
+	int suma = 0;
+	sort(a.begin(), a.end());
+	int i = 0;
+	while (suma < kasa) {
+		suma += a[i];
+		i++;
 	}
-	cout << "Array is sorted in "<<x<< " swaps."<<endl;
-	cout << "First Element: "<<a[0]<<endl;
-	cout << "Last Element: "<<a[a.size()-1]<<endl;
+	cout << i-1<<endl;
 	}
 
 int main()
 {
-	int n;
-	cin >> n;
+	int n,kasa;
+	cin >> n>>kasa;
 	vector<int> a(n);
 	for (int i = 0; i < n; i++) {
 		cin>>a[i];
 	}
-	countSwaps(a);
+	countSwaps(a,kasa);
 	return 0;
 }
 
