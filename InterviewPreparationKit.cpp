@@ -1,30 +1,52 @@
-﻿#include <iostream>
-#include <vector>
+﻿#include<cmath>
+#include<cstdio>
+#include<vector>
+#include<iostream>
 #include<algorithm>
-
 using namespace std;
 
+struct Player {
+	int score;
+	string name;
+};
 
-void countSwaps(vector<int> a, int kasa) {
-	int suma = 0;
-	sort(a.begin(), a.end());
-	int i = 0;
-	while (suma < kasa) {
-		suma += a[i];
-		i++;
+class Checker {
+public:
+	// complete this method
+	static int comparator(Player a, Player b) {
+		if (a.score > b.score)
+			return 1;
+		else if (a.score == b.score && a.name < b.name)
+			return 0;
+		else
+			return -1;
 	}
-	cout << i-1<<endl;
-	}
+};
 
+
+
+
+bool compare(Player a, Player b) {
+	if (Checker::comparator(a, b) == -1)
+		return false;
+	return true;
+}
 int main()
 {
-	int n,kasa;
-	cin >> n>>kasa;
-	vector<int> a(n);
+	int n;
+	cin >> n;
+	vector< Player > players;
+	string name;
+	int score;
 	for (int i = 0; i < n; i++) {
-		cin>>a[i];
+		cin >> name >> score;
+		Player player;
+		player.name = name, player.score = score;
+		players.push_back(player);
 	}
-	countSwaps(a,kasa);
+	sort(players.begin(), players.end(), compare);
+	for (int i = 0; i < players.size(); i++) {
+		cout << players[i].name << " " << players[i].score << endl;
+	}
 	return 0;
 }
-
